@@ -9,7 +9,7 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const sales = await salesModels.getById(id);
-  if (!sales) return messageError;
+  if (sales.length === 0) return messageError;
   return sales;
 };
 
