@@ -12,4 +12,5 @@ router.get('/sales/:id', Sales.getById);
 router.post('/products', 
 ProductValidate.validateName, ProductValidate.validateQuantity, Products.createProduct);
 router.put('/products/:id', Products.updateProduct);
+router.delete('/products/:id', Products.deleProduct);
 module.exports = router;
