@@ -21,8 +21,7 @@ const createProduct = async (name, quantity) => {
   if (productsWithThisName.length > 0) return false;
 
   const [{ insertId }] = await connection.execute(
-    `INSERT INTO StoreManager.products (name, quantity)
-     VALUES (?, ?)`,
+    'INSERT INTO products (name, quantity)VALUES (?, ?)',
     [name, quantity],
   );
 
