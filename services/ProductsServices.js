@@ -1,5 +1,6 @@
 const productsModels = require('../models/ProductModels');
 
+const errorCreateUser = { message: 'Product already exists' };
 const messageError = { message: 'Product not found' };
 
 const getAll = async () => {
@@ -12,5 +13,9 @@ const getById = async (id) => {
   if (!product) return messageError;
   return product;
 };
-
-module.exports = { getAll, getById };
+const createProduct = async (name, quantity) => {
+  const product = await productsModels.createProduct(name, quantity);
+  if (!product) return errorCreateUser;
+  return product;
+};
+module.exports = { getAll, getById, createProduct };
