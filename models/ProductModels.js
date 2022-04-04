@@ -2,19 +2,19 @@ const connection = require('../connection');
 
 const getAll = async () => {
   const [products] = await connection
-  .execute('SELECT * FROM StoreManager.products;');
+  .execute('SELECT * FROM products;');
   return products;
 };
 
 const getById = async (id) => {
   const [[products]] = await connection
-  .execute('SELECT * FROM StoreManager.products WHERE id=?;', [id]);
+  .execute('SELECT * FROM products WHERE id=?;', [id]);
   return products;
 };
 
 const createProduct = async (name, quantity) => {
   const [productsWithThisName] = await connection.execute(
-    `SELECT * FROM StoreManager.products
+    `SELECT * FROM products
     WHERE name = ?;`, [name],
   );
 
