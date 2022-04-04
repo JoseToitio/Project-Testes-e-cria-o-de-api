@@ -32,4 +32,11 @@ const createProduct = async (name, quantity) => {
   };
 };
 
-module.exports = { getAll, getById, createProduct };
+const updateProduct = async (id, name, quantity) => {
+  const [product] = await connection.execute(
+    'UPDATE products SET name=?, quantity=? WHERE id=?',
+    [name, quantity, id],
+  );
+  return product;
+};
+module.exports = { getAll, getById, createProduct, updateProduct };
