@@ -1,4 +1,5 @@
 const salesServices = require('../services/SalesServices');
+const saleModels = require('../models/SalesModels');
 
 const getAll = async (req, res) => {
   const sales = await salesServices.getAll();
@@ -22,9 +23,21 @@ const createSales = async (req, res) => {
 const updateSales = async (req, res) => {
   const { id } = req.params;
   const [{ productId, quantity }] = req.body;
-
   const item = await salesServices.updateSales(id, productId, quantity);
 
   return res.status(200).json(item);
 };
-module.exports = { getAll, getById, updateSales, createSales };
+
+const deleteSales = async (req, res) => {
+  const { id } = req.params;
+  const sale = await saleModels.getById(id);
+  if (sale.length === 0) {
+    return res.status(404).json({
+      message: 'Sale not found',
+    });
+  }
+  await saleModels.deleteSales(id);
+  res.status(204).json();
+};
+module.exports = { 
+  deleteSales, getAll, getById, updateSales, createSales };

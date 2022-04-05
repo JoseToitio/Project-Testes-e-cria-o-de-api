@@ -18,4 +18,6 @@ router.post('/sales/',
 saleValidate.validateProductId, saleValidate.validateQuantitySales, Sales.createSales);
 router.put('/sales/:id',
 saleValidate.validateProductId, saleValidate.validateQuantitySales, Sales.updateSales);
+router.delete('/sales/:id', Sales.deleteSales);
+
 module.exports = router;
