@@ -20,8 +20,8 @@ const createSales = async (dados) => {
     return error;
   }
 };
-const updateSales = async ({ id, productId, quantity }) => {
-  const sale = salesModels.updateSales(id, productId, quantity);
-  return sale;
+const updateSales = async (saleId, productId, quantity) => {
+  const item = await salesModels.updateSales(saleId, productId, quantity);
+  return item;
 };
 module.exports = { getAll, getById, updateSales, createSales };

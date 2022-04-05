@@ -21,10 +21,10 @@ const createSales = async (req, res) => {
 };
 const updateSales = async (req, res) => {
   const { id } = req.params;
-  console.log(req.body);
-  const [productId, quantity] = req.body;
-  const sale = await salesServices
-  .updateSales(id, productId, quantity);
-  return res.status(200).json(sale);
+  const [{ productId, quantity }] = req.body;
+
+  const item = await salesServices.updateSales(id, productId, quantity);
+
+  return res.status(200).json(item);
 };
 module.exports = { getAll, getById, updateSales, createSales };

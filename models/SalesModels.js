@@ -2,9 +2,10 @@ const connection = require('../connection');
 
 const getAll = async () => {
   const [sales] = await connection.execute(
-    `SELECT sale_id AS saleId, product_id AS productId, quantity, sales.date FROM sales_products
-        INNER JOIN sales ON sales_products.sale_id = sales.id
-        ORDER BY sales.id`,
+    `SELECT sp.sale_id as saleId,
+  sp.product_id as productId, sp.quantity, s.date
+  FROM StoreManager.sales_products AS sp INNER JOIN StoreManager.sales AS s
+  ON sp.sale_id = s.id ORDER BY sale_id, product_id`,
   );
   return sales;
 };
@@ -37,18 +38,13 @@ const createSales = async (dados) => {
     };
 };
 
-const updateSales = async (id, productId, quantity) => {
-  await connection.execute(`
-  UPDATE sales SET date = NOW() WHERE id = ?`,
-  [id]);
-  await connection.execute(`
-  UPDATE sales_products SET product_id = ?, quantity = ?
-  WHERE sale_id = ?`,
-  [productId, quantity, id]);
-  return {
-    saleId: id,
-    itemUpdated: [productId, quantity],
-  };
+const updateSales = async (saleId, productId, quantity) => {
+  await connection.execute(
+    'UPDATE StoreManager.sales_products SET quantity = ? WHERE sale_id = ? AND product_id = ?;',
+    [quantity, saleId, productId],
+  );
+
+  return { saleId, itemUpdated: [{ productId, quantity }] };
 };
 
 module.exports = { getAll, getById, updateSales, createSales };
