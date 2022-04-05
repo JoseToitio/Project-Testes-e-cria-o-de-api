@@ -21,7 +21,7 @@ const getById = async (id) => {
 
 const createSales = async (dados) => {
   const [{ insertId }] = await connection.execute(
-    'INSERT INTO sales (date) VALUES (NOW());',
+    'INSERT INTO StoreManager.sales (date) VALUES (NOW());',
   );
   const promise = dados.map(async ({ productId, quantity }) => 
     connection.execute(
