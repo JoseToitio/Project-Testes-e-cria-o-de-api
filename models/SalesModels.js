@@ -18,4 +18,37 @@ const getById = async (id) => {
   return sales;
 };
 
-module.exports = { getAll, getById };
+const createSales = async (dados) => {
+  const [{ insertId }] = await connection.execute(
+    'INSERT INTO sales (date) VALUES (NOW());',
+  );
+  const promise = dados.map(async ({ productId, quantity }) => 
+    connection.execute(
+      `INSERT INTO sales_products
+       (sale_id, product_id, quantity) VALUES(?,?,?)`,
+       [insertId, productId, quantity],
+    ));
+
+    await Promise.all(promise);
+
+    return {
+      id: insertId,
+      itemsSold: dados,
+    };
+};
+
+const updateSales = async (id, productId, quantity) => {
+  await connection.execute(`
+  UPDATE sales SET date = NOW() WHERE id = ?`,
+  [id]);
+  await connection.execute(`
+  UPDATE sales_products SET product_id = ?, quantity = ?
+  WHERE sale_id = ?`,
+  [productId, quantity, id]);
+  return {
+    saleId: id,
+    itemUpdated: [productId, quantity],
+  };
+};
+
+module.exports = { getAll, getById, updateSales, createSales };

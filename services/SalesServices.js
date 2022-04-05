@@ -12,5 +12,16 @@ const getById = async (id) => {
   if (sales.length === 0) return messageError;
   return sales;
 };
-
-module.exports = { getAll, getById };
+const createSales = async (dados) => { 
+  try {
+    const sale = await salesModels.createSales(dados);
+    return sale;
+  } catch (error) {
+    return error;
+  }
+};
+const updateSales = async ({ id, productId, quantity }) => {
+  const sale = salesModels.updateSales(id, productId, quantity);
+  return sale;
+};
+module.exports = { getAll, getById, updateSales, createSales };
