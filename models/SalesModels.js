@@ -23,7 +23,7 @@ const createSales = async (dados) => {
   const [{ insertId }] = await connection.execute(
     'INSERT INTO StoreManager.sales (date) VALUES (NOW());',
   );
-  const promise = dados.map(async ({ productId, quantity }) => 
+  const promise = dados.map(({ productId, quantity }) => 
     connection.execute(
       `INSERT INTO sales_products
        (sale_id, product_id, quantity) VALUES(?,?,?)`,
