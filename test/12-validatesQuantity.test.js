@@ -4,6 +4,7 @@ const mysql = require("mysql2/promise");
 const Importer = require("mysql-import");
 
 describe("12-validatesQuantity", () => {
+  jest.setTimeout(12000);
   const url = `http://localhost:${process.env.PORT}`;
   let connection;
 

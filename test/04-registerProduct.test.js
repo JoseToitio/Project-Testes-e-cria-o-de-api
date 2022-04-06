@@ -4,6 +4,7 @@ const Importer = require("mysql-import");
 require("dotenv").config();
 
 describe("04-registerProduct", () => {
+  jest.setTimeout(12000);
   const url = `http://localhost:${process.env.PORT}`;
   let connection;
 
