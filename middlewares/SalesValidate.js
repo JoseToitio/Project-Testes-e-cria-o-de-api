@@ -1,26 +1,25 @@
 const validateProductId = (req, res, next) => {
-  const sales = req.body;
-
-  for (let i = 0; i < sales.length; i += 1) {
-    if (sales[i].productId === undefined) {
-      return res.status(400).json({ message: '"productId" is required' });
-    }
+  const { body } = req;
+  const sales = body.some((sale) => !sale.productId);
+  if (sales) {
+    return res.status(400)
+    .json({ message: '"productId" is required' });
   }
-  next();
+  return next();
 };
 
 const validateQuantitySales = (req, res, next) => {
-  const sales = req.body;
+  const { body } = req;
 
-  for (let i = 0; i < sales.length; i += 1) {
-    if (sales[i].quantity === undefined) {
-      return res.status(400).json({ message: '"quantity" is required' });
-    }
-    if (sales[i].quantity <= 0) {
-      return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
-    }
+  const saleUndefined = body.some((item) => item.quantity === undefined);
+  if (saleUndefined) return res.status(400).json({ message: '"quantity" is required' });
+
+  const saleQuantity = body.some((item) => item.quantity <= 0);
+  if (saleQuantity) {
+    return res.status(422)
+    .json({ message: '"quantity" must be greater than or equal to 1' });
   }
-  next();
+  return next();
 };
 
 module.exports = {

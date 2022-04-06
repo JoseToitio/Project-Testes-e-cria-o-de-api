@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const router = require('./router/router');
+const routerProducts = require('./router/routerProducts');
+const routerSales = require('./router/routerSales');
 
 require('dotenv').config();
 // não remova esse endpoint, e para o avaliador funcionar
@@ -11,7 +12,9 @@ app.use(bodyParser.json());
 app.get('/', (_request, response) => {
   response.send();
 });
-app.use(router);
+app.use('/products', routerProducts);
+app.use('/sales', routerSales);
+
 app.listen(process.env.PORT, () => {
 console.log(`Escutando na porta ${process.env.PORT}`); 
 });
