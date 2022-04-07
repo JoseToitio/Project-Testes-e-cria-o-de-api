@@ -18,4 +18,27 @@ const createProduct = async (name, quantity) => {
   if (!product) return errorCreateUser;
   return product;
 };
-module.exports = { getAll, getById, createProduct };
+
+const updateProduct = async (id, name, quantity) => {
+  const findProduct = await productsModels.getById(id);
+  if (!findProduct) {
+    throw new Error('Product not found');
+  }
+  await productsModels.updateProduct(id, name, quantity);
+  const productUpdate = await productsModels.getById(id);
+  return productUpdate;
+};
+
+const deleteProduct = async (id) => {
+  const findProduct = await productsModels.getById(id);
+  if (!findProduct) {
+    return new Error('Product not found');
+  }
+  await productsModels.deleProduct(id);
+};
+module.exports = { 
+getAll, 
+getById,
+createProduct,
+updateProduct,
+deleteProduct };

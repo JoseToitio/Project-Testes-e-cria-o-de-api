@@ -1,5 +1,4 @@
 const productsServices = require('../services/ProductsServices');
-const productModles = require('../models/ProductModels');
 
 const getAll = async (_req, res) => {
   const products = await productsServices.getAll();
@@ -24,23 +23,21 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { name, quantity } = req.body;
-  const findProduct = await productModles.getById(id);
-  if (!findProduct) {
-    return res.status(404).json({ message: 'Product not found' });
+  try {
+    res.json(await productsServices.updateProduct(id, name, quantity));
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
-  await productModles.updateProduct(id, name, quantity);
-  const update = await productModles.getById(id);
-  res.json(update);
 };
 
 const deleProduct = async (req, res) => {
   const { id } = req.params;
-  const findProduct = await productModles.getById(id);
-  if (!findProduct) {
-    return res.status(404).json({ message: 'Product not found' });
+  try {
+    await productsServices.deleteProduct(id);
+    res.status(204).end();
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
-  await productModles.deleProduct(id);
-  res.status(204).json();
 };
 module.exports = { 
 getAll,
