@@ -32,7 +32,7 @@ const updateProduct = async (id, name, quantity) => {
 const deleteProduct = async (id) => {
   const findProduct = await productsModels.getById(id);
   if (!findProduct) {
-    return new Error('Product not found');
+    throw new Error('Product not found');
   }
   await productsModels.deleProduct(id);
 };

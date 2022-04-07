@@ -20,8 +20,18 @@ const createSales = async (dados) => {
     return error;
   }
 };
+
 const updateSales = async (saleId, productId, quantity) => {
   const item = await salesModels.updateSales(saleId, productId, quantity);
   return item;
 };
-module.exports = { getAll, getById, updateSales, createSales };
+
+const deleteSales = async (id) => {
+  const sale = await salesModels.getById(id);
+  if (sale.length === 0) {
+    throw new Error('Sale not found');
+  }
+  await salesModels.deleteSales(id);
+};
+
+module.exports = { getAll, getById, updateSales, createSales, deleteSales };
