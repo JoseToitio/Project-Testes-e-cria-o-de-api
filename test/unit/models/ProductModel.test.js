@@ -39,16 +39,15 @@ const newProduct = [
 describe('Teste do Products Models', () => {
   describe('testa a função getAll', () => {
     it('Deve retornar todos os produtos', async () => {
-      sinon.stub(
-        connection, "execute"
-      ).resolves([product1]);
+        sinon.stub(
+          connection, "execute"
+        ).resolves([product1]);
       const result = await productModel.getAll();
       expect(result).to.be.an("array").to.be.have.length(3);
       expect(result[0]).to.be.have.property("id");
       expect(result[0]).to.be.have.property("name");
       expect(result[0]).to.be.have.property("quantity");
       expect(result[0].name).to.be.equal("Garrafa de Água");
-      expect(result[0].quantity).to.be.exist;
     });
   });
 
@@ -58,6 +57,7 @@ describe('Teste do Products Models', () => {
         connection, "execute"
       ).resolves([product1]);
       const result = await productModel.getById(1);
+      console.log(result)
       expect(result).to.be.an("object");
       expect(result).to.have.property("id");
       expect(result).to.have.property("name");
