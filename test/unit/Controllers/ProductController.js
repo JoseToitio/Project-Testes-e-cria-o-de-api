@@ -37,7 +37,7 @@ describe("Testa o product Controller", () => {
       sinon.replace(ProductService, "getAll", () => {
         return Promise.resolve(product1)
       });
-      chai.request(app).get("/products")
+      chai.request('http://localhost:3306').get("/products")
       .end((_req, res) => {
         expect(res).to.be.have.status(200);
         expect(res.body).to.be.have.length(3);
@@ -52,7 +52,7 @@ describe("Testa o product Controller", () => {
         name: "Teclado",
         quantity: 100
       });
-      chai.request(app)
+      chai.request('http://localhost:3306')
       .get("/products/3")
       .end((_req, res) => {
         expect(res).to.be.have.status(200);
