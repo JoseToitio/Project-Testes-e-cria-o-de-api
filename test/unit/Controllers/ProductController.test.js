@@ -37,7 +37,7 @@ describe("Testa o product Controller", () => {
       sinon.replace(ProductService, "getAll", () => {
         return Promise.resolve(product1)
       });
-      chai.request('http://localhost:3306').get("/products")
+      chai.request(app).get("/products")
       .end((_req, res) => {
         expect(res).to.be.have.status(200);
         expect(res.body).to.be.have.length(3);
@@ -52,17 +52,35 @@ describe("Testa o product Controller", () => {
         name: "Teclado",
         quantity: 100
       });
-      chai.request('http://localhost:3306')
+      chai.request(app)
       .get("/products/3")
       .end((_req, res) => {
         expect(res).to.be.have.status(200);
         expect(res.body).to.be.have.property("name").to.be.equal("Teclado")
         expect(res.body).to.be.have.property('id').to.be.equal(3)
         done();
-      })
+      });
+    });
+  })
+  describe("testa se é possivel criar um produto", () => {
+    it("create product", (done) => {
+      sinon.stub(ProductService, "createProduct").resolves({
+        id:5,
+        name:"Mouse",
+        quantity: 20,
+      });
+      chai.request(app)
+      .post("/products")
+      .send({name: "Mouse", quantity: 20})
+      .end((_req, res) => {
+        expect(res).to.have.status(201);
+        expect(res.body).to.have.property("quantity").to.be.equal(20);
+        expect(res.body).to.have.property("id").to.be.equal(5);
+        expect(res.body).to.have.property("name").to.be.equal("Mouse");
+        done();
+      });
     })
   })
-
 
 
 });
