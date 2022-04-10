@@ -10,7 +10,7 @@ chai.use(chaiHttp);
 chai.use(sinonChai);
 
 afterEach(() => {
-  sinon.restore();
+  sinon.restore()
 });
 
 const product1 = [
