@@ -29,6 +29,12 @@ const product1 = [
     quantity: 5,
   }
 ]
+const product2 = {
+    id: 1,
+    name: "Garrafa de Água",
+    quantity: 20,
+}
+
 
 describe("Product Server Test", () => {
   describe("Testa função getAll",  () => {
@@ -42,5 +48,45 @@ describe("Product Server Test", () => {
       
     });
   });
+  describe('Testa função getByid', () => {
+    it("Retorna um produto", async () => {
+      sinon.stub(ProductService, "createProduct").resolves(product2);
+      const result = await ProductService.createProduct('a', 2);
+      expect(result).to.be.an("object")
+      expect(result).to.have.property("id");
+      expect(result).to.have.property("name");
+      expect(result).to.have.property("quantity");
+    });
+  });
+
+  describe("testa função delete", () => {
+    it("produto deletado", async () => {
+      sinon.stub(ProductModel, "getById").resolves(product2);
+      sinon.stub(ProductModel, "deleProduct").resolves(product2);
+      const result = await ProductService.deleteProduct(product2.id);
+      expect(result).to.be.an("undefined");
+    });
+  });
+
+  describe("testa a função update", () => {
+    it("produto atualizado", async() =>{
+      const product = {
+        id:1,
+        name: "Chocolate",
+        quantity: 300
+      }
+      sinon.stub(ProductModel, "getById").resolves(product);
+      sinon.stub(ProductModel, "updateProduct").resolves(product);
+      const result = await ProductService.updateProduct(
+        product.id,
+        product.name,
+        product.quantity
+      );
+      expect(result).to.be.an("object");
+      expect(result).to.have.property("id");
+      expect(result).to.have.property("name");
+      expect(result).to.have.property("quantity");
+    })
+  })
 
 });

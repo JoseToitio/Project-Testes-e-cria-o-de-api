@@ -28,13 +28,7 @@ const product1 = [
     quantity: 5,
   }
 ]
-const newProduct = [
-  {
-    id: 1,
-    name: 'Carne',
-    quantity: 10
-  }
-]
+
 
 describe('Teste do Products Models', () => {
   describe('testa a função getAll', () => {
@@ -57,7 +51,6 @@ describe('Teste do Products Models', () => {
         connection, "execute"
       ).resolves([product1]);
       const result = await productModel.getById(1);
-      console.log(result)
       expect(result).to.be.an("object");
       expect(result).to.have.property("id");
       expect(result).to.have.property("name");
