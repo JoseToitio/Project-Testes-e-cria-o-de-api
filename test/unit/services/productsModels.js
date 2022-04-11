@@ -12,31 +12,33 @@ chai.use(sinonChai);
 afterEach(() => {
   sinon.restore();
 });
-const product1 = [
-  {
-    id: 1,
-    name: "Garrafa de Água",
-    quantity: 20,
-  },
-  {
-    id: 2,
-    name: "Relógio",
-    quantity: 10,
-  },
-  {
-    id: 3,
-    name: "Creatina",
-    quantity: 5,
-  }
-]
-const product2 = {
+
+
+
+
+describe("Product Server Test", () => {
+  const product1 = [
+    {
+      id: 1,
+      name: "Garrafa de Água",
+      quantity: 20,
+    },
+    {
+      id: 2,
+      name: "Relógio",
+      quantity: 10,
+    },
+    {
+      id: 3,
+      name: "Creatina",
+      quantity: 5,
+    }
+  ];
+  const product2 = {
     id: 1,
     name: "Garrafa de Água",
     quantity: 20,
 }
-
-
-describe("Product Server Test", () => {
   describe("Testa função getAll",  () => {
     it("Verifica se retorna todos os produtos", async () => {
       sinon.stub(ProductModel, "getAll").resolves(product1);

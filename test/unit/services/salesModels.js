@@ -12,20 +12,21 @@ chai.use(sinonChai);
 afterEach(() => {
   sinon.restore();
 });
-const sales = [
-  {
-    id: 1,
-    productId: 1,
-    quantity: 2,
-  },
-  {
-    id: 2,
-    productId: 2,
-    quantity: 1,
-  },
-];
+
 
 describe("Testa Sales Services", () => {
+  const sales = [
+    {
+      id: 1,
+      productId: 1,
+      quantity: 2,
+    },
+    {
+      id: 2,
+      productId: 2,
+      quantity: 1,
+    },
+  ];
   describe("Testa função getall", () => {
     it("Verifica se retorna todos os sales", async () => {
       sinon.stub(SaleModel, "getAll").resolves(sales);

@@ -11,24 +11,25 @@ chai.use(sinonChai);
 afterEach(() => {
   sinon.restore();
 })
-const sales = [
-  {
-    id: 1,
-    productId: 1,
-    quantity: 120
-  },
-  {
-    id: 2,
-    productId: 2,
-    quantity: 203
-  },
-  {
-    id:3,
-    productId:3,
-    quantity:13
-  }
-];
+
 describe("Testando Sales Models",() => {
+  const sales = [
+    {
+      id: 1,
+      productId: 1,
+      quantity: 120
+    },
+    {
+      id: 2,
+      productId: 2,
+      quantity: 203
+    },
+    {
+      id:3,
+      productId:3,
+      quantity:13
+    }
+  ];
   describe('testa o retorno de todos os sales', () => { 
     it("retorno de todos os sales", async () => {
       sinon.stub(connection, "execute").resolves([sales]);

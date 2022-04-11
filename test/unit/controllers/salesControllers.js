@@ -15,39 +15,39 @@ afterEach(() => {
   sinon.restore();
 });
 
-const createSales = [
-  {
-    id: 1,
-    itemsSold: [
-      {
-        productId: 1,
-        quantity: 110,
-      },
-      {
-        productId: 2,
-        quantity: 230,
-      },
-    ],
-  },
-]
-const product1 = [
-  {
-    id: 1,
-    name: "Garrafa de Água",
-    quantity: 20,
-  },
-  {
-    id: 2,
-    name: "Relógio",
-    quantity: 10,
-  },
-  {
-    id: 3,
-    name: "Creatina",
-    quantity: 5,
-  }
-];
 describe("Testa Sales Controllers", () => {
+  const createSales = [
+    {
+      id: 1,
+      itemsSold: [
+        {
+          productId: 1,
+          quantity: 110,
+        },
+        {
+          productId: 2,
+          quantity: 230,
+        },
+      ],
+    },
+  ]
+  const product1 = [
+    {
+      id: 1,
+      name: "Garrafa de Água",
+      quantity: 20,
+    },
+    {
+      id: 2,
+      name: "Relógio",
+      quantity: 10,
+    },
+    {
+      id: 3,
+      name: "Creatina",
+      quantity: 5,
+    }
+  ];
   describe("Testa se retorna todos os sales", () => {
     it("GetAll Sales", (done) => {
       sinon.replace(SaleService, "getAll", () => {

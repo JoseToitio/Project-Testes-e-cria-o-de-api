@@ -11,6 +11,9 @@ afterEach(() => {
   sinon.restore();
 })
 
+
+describe('Teste do Products Models', () => {
+  
 const product1 = [
   {
     id: 1,
@@ -29,8 +32,6 @@ const product1 = [
   }
 ]
 
-
-describe('Teste do Products Models', () => {
   describe('testa a função getAll', () => {
     it('Deve retornar todos os produtos', async () => {
         sinon.stub(

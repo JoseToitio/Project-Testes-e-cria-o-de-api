@@ -15,8 +15,10 @@ app.get('/', (_request, response) => {
 app.use('/products', routerProducts);
 app.use('/sales', routerSales);
 
-app.listen(process.env.PORT, () => {
-console.log(`Escutando na porta ${process.env.PORT}`); 
-});
+if (!module.parent) {
+  app.listen(process.env.PORT, () => {
+    console.log(`Escutando na porta ${process.env.PORT}`);
+  });
+}
 
 module.exports = app;

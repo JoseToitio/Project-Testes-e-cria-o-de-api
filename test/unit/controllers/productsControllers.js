@@ -13,25 +13,24 @@ afterEach(() => {
   sinon.restore()
 });
 
-const product1 = [
-  {
-    id: 1,
-    name: "Garrafa de Água",
-    quantity: 20,
-  },
-  {
-    id: 2,
-    name: "Relógio",
-    quantity: 10,
-  },
-  {
-    id: 3,
-    name: "Creatina",
-    quantity: 5,
-  }
-];
-
 describe("Testa o product Controller", () => {
+  const product1 = [
+    {
+      id: 1,
+      name: "Garrafa de Água",
+      quantity: 20,
+    },
+    {
+      id: 2,
+      name: "Relógio",
+      quantity: 10,
+    },
+    {
+      id: 3,
+      name: "Creatina",
+      quantity: 5,
+    }
+  ];
   describe("Testa o retorno de todos os produtos", () => {
     it("getAll",  (done) => {
       sinon.replace(ProductService, "getAll", () => {
